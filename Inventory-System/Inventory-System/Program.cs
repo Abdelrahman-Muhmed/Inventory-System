@@ -1,12 +1,22 @@
 
+using Inventory_System.Helpers;
+using Inventory_System_Core.IRepository;
+using Inventory_System_Core.Service;
 using Inventory_System_EF.Data;
+using Inventory_System_EF.Repository;
+using Inventory_System_EF.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
+builder.Services.AddScoped(typeof(IProductService), typeof(ProductServic));
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
+// Register AutoMapper and PictureUrlResolver
+builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddDbContext<StoreContext>(options =>
 {
