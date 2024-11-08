@@ -29,6 +29,37 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
+
+using var scope = app.Services.CreateScope();
+
+
+#region Start Seeding Data 
+//Aske cli to Make Object From Class 
+var servies = scope.ServiceProvider;
+var dbContext = servies.GetRequiredService<StoreContext>();
+
+//Seeding Data
+var loggerFactory = servies.GetRequiredService<ILoggerFactory>();
+
+try
+{
+    //Migration Data 
+    await dbContext.Database.MigrateAsync();
+    //Seeding Data 
+    await DataSeeding.seedAsync(dbContext);
+
+}
+catch (Exception ex)
+{
+    var logger = loggerFactory.CreateLogger<Program>();
+
+
+    logger.LogError(ex, "An error happened When during migration");
+
+} 
+#endregion
+
+
 // Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
