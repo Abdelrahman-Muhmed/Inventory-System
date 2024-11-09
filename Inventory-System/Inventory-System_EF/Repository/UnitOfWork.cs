@@ -40,7 +40,6 @@ namespace Inventory_System_EF.Repository
 
             return _reopsitory[key] as IGenericRepository<T>;
 
-            //but i can use HashTable Foe make key object and value object 
         }
 
 

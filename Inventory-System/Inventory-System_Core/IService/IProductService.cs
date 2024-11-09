@@ -12,6 +12,10 @@ namespace Inventory_System_Core.Service
         Task<IReadOnlyList<Products>> GetAllProductAsync();
         Task<Products> GetProductAsync(int id);
         Task<IReadOnlyList<ProductBrand>> GetProductBrandAsync();
+        Task<IEnumerable<Products>> GetProductsByBrandName(string CategoryName);
+
         Task<IReadOnlyList<ProductCategory>> GetProductCategoryAsync();
+        Task<Products> Add(Products entity);
+        Task<Products> Update(Products entity);
     }
 }

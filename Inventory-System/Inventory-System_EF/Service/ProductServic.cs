@@ -16,6 +16,9 @@ namespace Inventory_System_EF.Service
         {
             _unitOfWork = unitOfWork;
         }
+
+  
+
         public Task<IReadOnlyList<Products>> GetAllProductAsync()
         {
             var products = _unitOfWork.Repository<Products>().GetAllAsync();
@@ -39,5 +42,29 @@ namespace Inventory_System_EF.Service
             var category = _unitOfWork.Repository<ProductCategory>().GetAllAsync();
             return category;
         }
+
+        public async Task<Products> Add(Products entity)
+        {
+             _unitOfWork.Repository<Products>().Add(entity);
+             await _unitOfWork.CompleteAsync();
+
+            return entity;
+        }
+
+        public async Task<Products> Update(Products entity)
+        {
+            _unitOfWork.Repository<Products>().Update(entity);
+            await _unitOfWork.CompleteAsync();
+            return entity;
+        }
+
+        public async Task<IEnumerable<Products>> GetProductsByBrandName(string CategoryName)
+        {
+
+          var allProducts =  await _unitOfWork.Repository<Products>().GetByBrandName(CategoryName);
+            return allProducts;
+        }
+
+     
     }
 }

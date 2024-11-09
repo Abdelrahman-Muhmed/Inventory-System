@@ -11,5 +11,7 @@ namespace Inventory_System_Core.IRepository
     {
         IGenericRepository<T> Repository<T>() where T : BaseEntity;  // So when i path any Table here he will create The Object What i need When i ask 
         Task<int> CompleteAsync();
+   
+
     }
 }

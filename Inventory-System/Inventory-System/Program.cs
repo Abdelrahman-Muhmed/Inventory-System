@@ -13,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
 builder.Services.AddScoped(typeof(IProductService), typeof(ProductServic));
+
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 // Register AutoMapper and PictureUrlResolver
